@@ -17,6 +17,9 @@ export const player = (() => {
 
       // Agregar música al juego
       this.initAudio_();
+
+      // Agregar niebla azul a la escena con densidad ajustada
+      this.addFog_();
     }
 
     // Método para inicializar el audio
@@ -30,6 +33,22 @@ export const player = (() => {
       this.audioElement_.play().catch(function(error) {
         console.log("Error al reproducir música:", error);
       });
+    }
+
+    // Método para agregar niebla azul a la escena con densidad ajustada
+    addFog_() {
+      // Color de la niebla (azul claro)
+      const fogColor = new THREE.Color(0x80b4ff);
+      // Distancia inicial de la niebla
+      const near = 1;
+      // Distancia final de la niebla
+      const far = 100;
+      // Densidad de la niebla (controla la intensidad)
+      const density = 0.1; // Ajusta este valor para ver cambios en la intensidad
+
+      // Crear y aplicar la niebla a la escena
+      this.params_.scene.fog = new THREE.Fog(fogColor, near, far);
+      this.params_.scene.fog.density = density;
     }
 
     // Método para crear la interfaz de selección de dinosaurios
@@ -172,5 +191,3 @@ export const player = (() => {
       Player: Player,
   };
 })();
-
-
